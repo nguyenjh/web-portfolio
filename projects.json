@@ -14,6 +14,13 @@
         "link2": "https://github.com/nguyenjh/CSE-110-Group-11"
     },
     {
+        "title": "Second First Date",
+        "image": "./media/second_first_date.png",
+        "description": "GMTK 2025 Game Jam Submission.",
+        "link1": "https://juliexd.itch.io/second-first-date",
+        "link2": "https://github.com/nguyenjh/second-first-date"
+    },
+    {
         "title": "TaskRPG",
         "image": "./media/taskrpg.png",
         "description": "Gamified productivity website.",
@@ -33,5 +40,12 @@
         "description": "MERN stack hotel booking website.",
         "link1": "https://github.com/nguyenjh/travel-serenity",
         "link2": "https://github.com/nguyenjh/travel-serenity"
+    },
+    {
+        "title": "Welcome Back, User",
+        "image": "./media/welcome_back_user.png",
+        "description": "Patch Notes v1.0 Game Jam Submission.",
+        "link1": "https://juliexd.itch.io/welcome-back-user",
+        "link2": "https://juliexd.itch.io/welcome-back-user"
     }
 ]
