@@ -4,48 +4,55 @@
         "image": "./media/codenames.png",
         "description": "A digital recreation of the card game, Codenames.",
         "link1": "https://codenames-acm.netlify.app/",
-        "link2": "https://github.com/acmucsd-projects/sp23-hack-team-1"
+        "link2": "https://github.com/acmucsd-projects/sp23-hack-team-1",
+        "technologies": ["HTML", "CSS", "JS", "React", "Node.js"]
     },
     {
         "title": "Plateful",
         "image": "./media/plateful.png",
         "description": "Social-Sharing Recipe Platform.",
         "link1": "https://github.com/nguyenjh/CSE-110-Group-11",
-        "link2": "https://github.com/nguyenjh/CSE-110-Group-11"
+        "link2": "https://github.com/nguyenjh/CSE-110-Group-11",
+        "technologies": ["HTML", "CSS", "JS", "React", "Node.js", "MongoDB", "Express.js"]
     },
     {
         "title": "Second First Date",
         "image": "./media/second_first_date.png",
         "description": "GMTK 2025 Game Jam Submission.",
         "link1": "https://juliexd.itch.io/second-first-date",
-        "link2": "https://github.com/nguyenjh/second-first-date"
+        "link2": "https://github.com/nguyenjh/second-first-date",
+        "technologies": ["C#"]
     },
     {
         "title": "TaskRPG",
         "image": "./media/taskrpg.png",
         "description": "Gamified productivity website.",
         "link1": "https://taskrpg.netlify.app/",
-        "link2": "https://github.com/nguyenjh/TaskRPG"
+        "link2": "https://github.com/nguyenjh/TaskRPG",
+        "technologies": ["HTML", "CSS", "JS"]
     },
     {
         "title": "The Lost Royal Cat",
         "image": "./media/lost_royal_cat.png",
         "description": "A simple 2D platformer game created using Unity.",
         "link1": "https://juwie-ly.itch.io/the-lost-royal-cat",
-        "link2": "https://github.com/nguyenjh/The-Lost-Royal-Cat"
+        "link2": "https://github.com/nguyenjh/The-Lost-Royal-Cat",
+        "technologies": ["C#"]
     },
     {
         "title": "Travel Serenity",
         "image": "./media/travel_serenity.png",
         "description": "MERN stack hotel booking website.",
         "link1": "https://github.com/nguyenjh/travel-serenity",
-        "link2": "https://github.com/nguyenjh/travel-serenity"
+        "link2": "https://github.com/nguyenjh/travel-serenity",
+        "technologies": ["HTML", "CSS", "JS", "React", "Node.js", "MongoDB", "Express.js"]
     },
     {
         "title": "Welcome Back, User",
         "image": "./media/welcome_back_user.png",
         "description": "Patch Notes v1.0 Game Jam Submission.",
         "link1": "https://juliexd.itch.io/welcome-back-user",
-        "link2": "https://juliexd.itch.io/welcome-back-user"
+        "link2": "https://juliexd.itch.io/welcome-back-user",
+        "technologies": ["C#"]
     }
 ]

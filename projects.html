@@ -29,9 +29,9 @@
     <main id="projectspageMain">
         <aside>
             <search>
-                <form>
+                <form id="searchForm">
                     <label for="projectSearch">Search projects from the list:</label>
-                    <input list="projectsDL" name="project" id="project" placeholder="Search Projects">
+                    <input list="projectsDL" name="project" id="projectSearch" placeholder="Search Projects">
                     <datalist id="projectsDL">
                         <option value="Code Names - ACM">
                         <option value="Plateful">
@@ -42,6 +42,7 @@
                         <option value="Welcome Back, User">
                     </datalist>
                     <button id="submitBtn" type="submit">Submit</button>
+                    <button id="clearSearchBtn" type="button">Clear</button>
                 </form>
             </search>
             <hr>
@@ -49,22 +50,24 @@
             <dl>
                 <dt>Web Development</dt>
                 <dd>
-                    <button>HTML</button>
-                    <button>CSS</button>
-                    <button>JS</button>
-                    <button>MongoDB</button>
-                    <button>Express.js</button>
-                    <button>React</button>
-                    <button>Node.js</button>
+                    <button class="tech-filter" data-tech="HTML">HTML</button>
+                    <button class="tech-filter" data-tech="CSS">CSS</button>
+                    <button class="tech-filter" data-tech="JS">JS</button>
+                    <button class="tech-filter" data-tech="MongoDB">MongoDB</button>
+                    <button class="tech-filter" data-tech="Express.js">Express.js</button>
+                    <button class="tech-filter" data-tech="React">React</button>
+                    <button class="tech-filter" data-tech="Node.js">Node.js</button>
                 </dd>
                 <dt>Game Development</dt>
                 <dd>
-                    <button>C#</button>
+                    <button class="tech-filter" data-tech="C#">C#</button>
                 </dd>
             </dl>
+            <button id="clearFiltersBtn">Clear All Filters</button>
         </aside>
         <section id="projectspageSection">
             <h2 id="h2ProjectTitle">PROJECTS</h2>
+            <div id="filterStatus"></div>
             <article id="projects">
 
             </article>

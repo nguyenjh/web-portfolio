@@ -1,6 +1,12 @@
 // Add a class to <html> to indicate JS is enabled
 document.documentElement.classList.add("js-enabled");
 
+// Global variables for projects and filtering
+let allProjects = [];
+let filteredProjects = [];
+let activeFilters = new Set();
+let currentSearchTerm = '';
+
 // Contact Form
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contactForm");
@@ -130,6 +136,7 @@ class ProjectCard extends HTMLElement {
         const description = this.getAttribute('description') || 'Project description goes here.';
         const link1 = this.getAttribute('link1') || '#';
         const link2 = this.getAttribute('link2') || '#';
+        const technologies = this.getAttribute('technologies') || '';
     
         this.shadowRoot.innerHTML = `
             <style>
@@ -137,6 +144,8 @@ class ProjectCard extends HTMLElement {
                     display: flex;
                     gap: 1rem;
                     margin-bottom: 1rem;
+                    padding: 1rem;
+                    transition: all 0.3s ease;
                 }
                 
                 .projectItem:hover {
@@ -145,13 +154,12 @@ class ProjectCard extends HTMLElement {
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 10px;
                     transform: translateY(-2px);
-                    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
                 }
 
                 .projectItem img {
                     border-radius: 10px;
                     margin: 1rem 0;
-                    width: 180px;
+                    width: 200px;
                     transition: transform 0.3s ease-in-out;
                 }
 
@@ -181,6 +189,23 @@ class ProjectCard extends HTMLElement {
                     transform: scale(1.1);
                 }
 
+                .tech-tags {
+                    margin-top: 0.5rem;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    padding-bottom: 15px;
+                }
+                
+                .tech-tag {
+                    background-color: rgba(255, 165, 0, 0.2);
+                    color: var(--orange);
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 4px;
+                    font-size: 0.8rem;
+                    border: 1px solid var(--orange);
+                }
+
                 :host-context(.light-theme) h2 {
                     color: var(--accent-color);
                 }
@@ -191,6 +216,12 @@ class ProjectCard extends HTMLElement {
 
                 :host-context(.light-theme) a:hover {
                     color: var(--accent-color);
+                }
+                
+                :host-context(.light-theme) .tech-tag {
+                    background-color: rgba(255, 165, 0, 0.1);
+                    color: var(--accent-color);
+                    border-color: var(--accent-color);
                 }
             </style>
 
@@ -204,6 +235,9 @@ class ProjectCard extends HTMLElement {
                 <hgroup>
                     <h2>${title}</h2>
                     <p>${description}</p>
+                    <div class="tech-tags">
+                        ${technologies.split(',').map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
                     <a rel="noopener" target="_blank" href="${link1}">
                         Website
                     </a>
@@ -220,7 +254,7 @@ class ProjectCard extends HTMLElement {
 
 customElements.define('project-card', ProjectCard);
 
-// Fetch data from projects.json
+// Fetch data from projects.json and initialize search/filter functionality
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed'); // Check if this logs
 
@@ -233,24 +267,155 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             console.log('Data fetched:', data); // Check if this logs the correct data
-            const projectsContainer = document.getElementById('projects');
-            if (!projectsContainer) {
-                console.error('Projects container not found');
-                return;
-            }
-            console.log('Projects container found:', projectsContainer); // Check if this logs
-            data.forEach(project => {
-                const card = document.createElement('project-card');
-                card.setAttribute('title', project.title);
-                card.setAttribute('image', project.image);
-                card.setAttribute('description', project.description);
-                card.setAttribute('link1', project.link1);
-                card.setAttribute('link2', project.link2);
-                projectsContainer.appendChild(card);
-            });
+            allProjects = data;
+            filteredProjects = [...allProjects];
+            
+            // Initialize projects display
+            displayProjects();
+            
+            // Set up search and filter functionality
+            setupSearchAndFilter();
         })
         .catch(error => console.error('Error fetching projects:', error));
 });
+
+// Set up search and filter functionality
+function setupSearchAndFilter() {
+    // Search form
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('projectSearch');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    
+    // Filter buttons
+    const techFilterButtons = document.querySelectorAll('.tech-filter');
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+    
+    // Search functionality
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        currentSearchTerm = searchInput.value.trim().toLowerCase();
+        applyFilters();
+    });
+    
+    // Clear search button
+    clearSearchBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        currentSearchTerm = '';
+        applyFilters();
+    });
+    
+    // Technology filter buttons
+    techFilterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tech = this.getAttribute('data-tech');
+            
+            if (activeFilters.has(tech)) {
+                activeFilters.delete(tech);
+                this.classList.remove('active');
+            } else {
+                activeFilters.add(tech);
+                this.classList.add('active');
+            }
+            
+            applyFilters();
+        });
+    });
+    
+    // Clear all filters button
+    clearFiltersBtn.addEventListener('click', function() {
+        activeFilters.clear();
+        currentSearchTerm = '';
+        searchInput.value = '';
+        
+        // Remove active class from all filter buttons
+        techFilterButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+        
+        applyFilters();
+    });
+}
+
+// Apply all active filters and search
+function applyFilters() {
+    filteredProjects = allProjects.filter(project => {
+        // Apply search filter
+        const matchesSearch = currentSearchTerm === '' || 
+            project.title.toLowerCase().includes(currentSearchTerm) ||
+            project.description.toLowerCase().includes(currentSearchTerm);
+        
+        // Apply technology filters
+        const matchesTech = activeFilters.size === 0 || 
+            Array.from(activeFilters).some(tech => 
+                project.technologies.includes(tech)
+            );
+        
+        return matchesSearch && matchesTech;
+    });
+    
+    displayProjects();
+    updateFilterStatus();
+}
+
+// Display the filtered projects
+function displayProjects() {
+    const projectsContainer = document.getElementById('projects');
+    
+    if (!projectsContainer) {
+        console.error('Projects container not found');
+        return;
+    }
+    
+    // Clear existing projects
+    projectsContainer.innerHTML = '';
+    
+    // Display message if no projects match filters
+    if (filteredProjects.length === 0) {
+        projectsContainer.innerHTML = `
+            <div class="no-projects-message">
+                <p>No projects match your current filters. Try adjusting your search or clearing some filters.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Create and append project cards
+    filteredProjects.forEach(project => {
+        const card = document.createElement('project-card');
+        card.setAttribute('title', project.title);
+        card.setAttribute('image', project.image);
+        card.setAttribute('description', project.description);
+        card.setAttribute('link1', project.link1);
+        card.setAttribute('link2', project.link2);
+        card.setAttribute('technologies', project.technologies.join(','));
+        projectsContainer.appendChild(card);
+    });
+}
+
+// Update the filter status display
+function updateFilterStatus() {
+    const filterStatus = document.getElementById('filterStatus');
+    
+    if (!filterStatus) return;
+    
+    let statusText = '';
+    
+    if (currentSearchTerm !== '' || activeFilters.size > 0) {
+        statusText = `Showing ${filteredProjects.length} of ${allProjects.length} projects`;
+        
+        if (currentSearchTerm !== '') {
+            statusText += ` matching "${currentSearchTerm}"`;
+        }
+        
+        if (activeFilters.size > 0) {
+            statusText += ` using ${Array.from(activeFilters).join(', ')}`;
+        }
+    } else {
+        statusText = `Showing all ${allProjects.length} projects`;
+    }
+    
+    filterStatus.textContent = statusText;
+}
 
 // // Data Loading
 // // Default data to store in localStorage

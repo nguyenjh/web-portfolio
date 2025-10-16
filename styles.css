@@ -351,6 +351,12 @@ aside dl dd button {
     padding: 10px;
 }
 
+.tech-filter.active {
+   background: color(display-p3 1 0.3 0);
+    color: white;
+    border-color: var(--orange);
+}
+
 #projectspageSection {
     width: 70%;
     padding: 1rem;
