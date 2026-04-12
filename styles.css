@@ -77,7 +77,7 @@ header a:hover {
     z-index: -1;
 }
 
-#homepageMain, #aboutpageMain, #workexppageMain, #resumepageMain {
+#homepageMain, #aboutpageMain, #workexppageMain, #resumepageMain, #casestudyMain {
     position: relative;
     display: flex;
     justify-content: center;
@@ -766,6 +766,146 @@ header#crudpageHeader li:last-child {
 footer#crudpageFooter {
     position: absolute;
     margin-left: -8px;
+    width: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    font-size: 120%;
+}
+
+/* CASE STUDY PAGE */
+
+header#casestudyHeader {
+    position: relative;
+    margin-left: -8px;
+}
+
+header#casestudyHeader li:last-child {
+    padding-right: 23px;
+}
+
+section#casestudySection {
+    font-size: 120%;
+    text-align: center;
+    width: 80%;
+    max-width: 900px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    animation: slideUpFadeIn 1.2s ease-out forwards;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section#casestudySection h2 {
+    font-size: 2rem;
+    color: var(--orange);
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+section#casestudySection img {
+    border-radius: 10px;
+    margin: 1rem 0;
+    width: 250px;
+    transition: transform 0.3s ease-in-out;
+}
+
+section#casestudySection img:hover {
+    transform: scale(1.05);
+}
+
+#casestudyIntro {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 700px;
+}
+
+#casestudyIntro hgroup {
+    text-align: left;
+    font-size: 200%;
+}
+
+#casestudyIntro p > span {
+    color: var(--orange);
+}
+
+#casestudyIntro img:hover {
+    transform: scale(1.05);
+}
+
+section#casestudySection article {
+    font-size: 130%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: left;
+    width: 100%;
+    max-width: 700px;
+    margin: 1rem 0;
+    animation: slideUpFadeIn 0.2s ease-out forwards;
+}
+
+section#casestudySection h3 {
+    text-decoration: underline;
+    color: var(--orange);
+}
+
+section#casestudySection ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+section#casestudySection ul li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section#casestudySection table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+section#casestudySection th, td {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: left;
+}
+
+section#casestudySection th {
+    text-decoration: underline;
+}
+
+section#casestudySection th {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+section#casestudySection td {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+footer#casestudyFooter {
+    position: relative;
+    margin-left: -8px;
+    margin-bottom: -9px;
+    margin-top: 20px;
     width: 100%;
     text-align: center;
     background: rgba(0, 0, 0, 0.5);

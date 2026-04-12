@@ -54,5 +54,13 @@
         "link1": "https://juliexd.itch.io/welcome-back-user",
         "link2": "https://juliexd.itch.io/welcome-back-user",
         "technologies": ["C#"]
+    },
+    {
+        "title": "Work In Progress Case Study (COGS 127)",
+        "image": "./media/loading.png",
+        "description": "Work In Progress Case Study (COGS 127).",
+        "link1": "casestudy.html",
+        "link2": "casestudy.html",
+        "technologies": ["Figma"]
     }
 ]
