@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const subject = `Contact Form Submission from ${name}`;
         const body = `${comments}`;
-        const mailtoUrl = `mailto:jhn013@ucsd.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=jhn013@ucsd.edu&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         const confirmSend = confirm("Your email client will open to send the message. Continue?");
         if (confirmSend) {
