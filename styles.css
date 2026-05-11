@@ -851,6 +851,11 @@ section#casestudySection article {
     animation: slideUpFadeIn 0.2s ease-out forwards;
 }
 
+#casestudyImgContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 section#casestudySection h3 {
     text-decoration: underline;
     color: var(--orange);
