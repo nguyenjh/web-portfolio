@@ -856,6 +856,12 @@ section#casestudySection article {
     justify-content: space-evenly;
 }
 
+section#casestudySection #casestudyImgContainer img.beforeAfterImg {
+    width: 700px;
+    max-width: 100%;
+    height: auto;
+}
+
 section#casestudySection h3 {
     text-decoration: underline;
     color: var(--orange);
