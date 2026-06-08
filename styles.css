@@ -924,6 +924,13 @@ footer#casestudyFooter {
     font-size: 120%;
 }
 
+video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 35px;
+}
+
 /* Light Theme */
 
 #theme-toggle {
